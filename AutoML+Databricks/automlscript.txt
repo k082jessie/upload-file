@@ -1,0 +1,5 @@
+# Application (client) ID:
+cf446eaf-3099-4179-94e3-20b51bc4a78f
+
+# Client Secret Value:
+SBoFq1TfYG2~Z1E_4N3i_ialkLs0bgN~ZU
