@@ -1,0 +1,32 @@
+### 指定顯卡
+不要在script中指定，tensorflow 或 pytorch的 package中指定gpu的api都會變化
+在linux指令前加env/export CUDA_VISIBLE_DEVICES=0,1,2
+env是當下那個process套用此設定
+export是現在那個client都套用此設定
+
+### 碰到NCCL port多次連結導致的connection error
+在指令前加env NCCL_DEBUG=INFO 把log檔列出來看
+
+### 列出process的id
+用ps uxf才能看到實際情況，ps列出的內容不完全
+
+### 下proxy下載檔案
+pip download xxxxxxx --python-version 36 --only-binary=:all: --proxy=AUO\\帳號:密碼@auhqwsg.corpnet.auo.com:8080 --cert /home/nfs/user/davidkylee/pip_package/TMGCert.cer
+會下載所有whl檔到當下的目錄
+
+換到其他機台安裝pip_package中的檔案
+pip install ....whl --no-index --find-link=.
+--no-index 一定要加 不然會retry 5次
+find-link指向你的資料夾
+
+在VM中就不用下--user
+
+--workers???
+如果是指batch size的話要看是指一張卡的batch size還是總共的batch size
+一張卡的話，不用更動數字
+
+### 檢查指定了哪些顯卡
+$CUDA_VISIBLE_DEVICES
+
+### 生成結果不佳的可能原因
+batch size太小、訓練epoch太少、lr太大或太小、資料餵錯、......

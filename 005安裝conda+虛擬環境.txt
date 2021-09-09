@@ -1,0 +1,42 @@
+bash AnacondaXXX.sh
+指定路徑 /home/nfs/user/jessieyen/anaconda3
+add path? yes
+wish to install VScode? no
+檢查有沒有加入path => vim ~/.bashrc
+檢查python是不是裝anaconda版 => python
+conda config --set proxy_servers.https http://NT account: 'password'@auhqwsg.corpnet.auo.com:8080
+載python package(TMGCert.cer)
+conda config --set ssl_verify 'TMGCert的路徑'	###不會產生兩個路徑
+conda info --all
+conda create -n 虛擬環境名稱 python=版本
+conda env list
+conda activate 虛擬環境名稱
+如有錯誤訊息
+	選第一個選項 => echo ". /home/nfs/user/jessieyen/anaconda3/etc/profile.d/conda.sh" >> ~/.bashrc
+	source ~/.bashrc
+否則繼續
+conda install 所有要裝得套件 --insecure
+
+### 搬到其他主機
+在新主機上
+先確認python是不是只存在在linux上
+拷貝005上的PATH至新主機 => vim ~/.bashrc
+source ~/.bashrc
+再確認python是不是換到anaconda
+conda env list
+conda activate CIT
+確認套件 => conda list
+
+### check opencv gpu
+import cv2
+count = cv2.cuda.getCudaEnabledDeviceCount()
+print(count)
+
+
+### 下載packages連線超時
+解法: 1. 原指令後加--insecure
+	  2. 從url把檔案載下放到相對應的資料夾(ex: pkgs=>這是global的資料夾，非特定虛擬環境下的檔案位置)有可能是沒有compile過的內容
+		 => 由指令下載安裝的套件會自動把相關的檔案放到各自的資料夾中
+德彥給的參考: https://docs.anaconda.com/anaconda/user-guide/tasks/install-packages/
+			  conda install /package-path/package-filename.tar.bz2 
+			  有dependency自己解
